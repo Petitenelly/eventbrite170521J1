@@ -1,28 +1,34 @@
 class Event < ApplicationRecord
     has_many :attendances
     has_many :users, through: :attendances
-
+    belongs_to :admin, class_name: 'User'
+   
     validates :start_date,
     presence: true,
-    # rajouter start_date doit être après aujourd'hui
+    numericality: { greater_than_or_equal_to: Time.now.to_i } 
     
     validates :duration,
-    presence: true,
-    #rajouter multiple de 5 et positif
-    
-    
+    presence: true, if: :multiple_5_and_positive?
+   
     validates :title,
     presence: true,
-    #rajouter taille entre 5 et 140 caractères
+    length: { in: 5..140 }
 
     validates :description,
     presence: true,
-    #rajouter taille entre 20 et 1000 caractères
+    length: { in: 20..1000 }
 
     validates :price,
     presence: true,
-    #rajouter taille entre 1 et 1000 euros
+    numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000}
 
     validates :location,
-    presence: true,
+    presence: true
+
+    private
+
+  def multiple_5_and_positive?
+      return true if self.duration % 5 == 0 && self.duration > 0
+        false
+  end
 end
