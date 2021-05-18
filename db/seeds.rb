@@ -19,7 +19,7 @@ Attendance.destroy_all
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
         email: Faker::Name.first_name+'@yopmail.com',
-        description: Faker::Lorem.paragraph_by_chars(number: 50, supplemental: false),
+        description: Faker::Lorem.paragraph_by_chars(number: 20, supplemental: false),
         encrypted_password: Faker::Internet.password(min_length: 6, max_length: 20)
     )
   end

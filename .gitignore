@@ -25,3 +25,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+#pour sauver la clé API Sendgrid de façon sécurisée
+.env
