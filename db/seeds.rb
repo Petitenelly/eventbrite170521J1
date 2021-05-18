@@ -27,17 +27,21 @@ Attendance.destroy_all
   
   puts "Les users ont été crées"
 
-15.times do
-  e = Event.create(
-      title: Faker::Lorem.paragraph_by_chars(number: rand(6..20)), 
-      start_date: Faker::Date.forward(days: 30), 
-      duration: [5,10,20,30].sample, 
-      description: Faker::Lorem.paragraph_by_chars(number: rand(100..200)),
-      price: Faker::Number.between(from: 1, to: 1000),
-      location: Faker::Lorem.word,
-      #admin: User.all.sample
-    )
-  end
+
+  t1 = Time.parse("2021-05-18 20:40:34")
+  t2 = Time.parse("2022-01-01 00:00:00")
+
+  6.times do |x|
+    Event.create(
+    start_date: rand(t1..t2),
+    duration: rand(5..100)*5,
+    description: Faker::Lorem.paragraph_by_chars(number: 100, supplemental: false),
+    location: Faker::Address.city,
+    price: rand(1..100),
+    title: Faker::Book.title)
+  
+end
+
 
   puts "Les events ont été crées"
 
