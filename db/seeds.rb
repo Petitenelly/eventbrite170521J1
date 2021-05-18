@@ -14,17 +14,16 @@ User.destroy_all
 Event.destroy_all
 Attendance.destroy_all
 
-20.times do
-    u = User.create(
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        email: Faker::Name.first_name+'@yopmail.com',
-        description: Faker::Lorem.paragraph_by_chars(number: 20, supplemental: false),
-        encrypted_password: Faker::Internet.password(min_length: 6, max_length: 20)
-    )
-    u.errors.messages
-  end
-  
+  5.times do |x|
+  fname = Faker::Name.first_name
+  User.create(
+	  description: Faker::Quote.famous_last_words, 
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+	  email: fname + "@yopmail.com",
+    password: 'bonjour')
+end 
+
   puts "Les users ont été crées"
 
 
@@ -41,7 +40,6 @@ Attendance.destroy_all
     title: Faker::Book.title)
   
 end
-
 
   puts "Les events ont été crées"
 
