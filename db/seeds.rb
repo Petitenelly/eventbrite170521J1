@@ -15,19 +15,20 @@ Event.destroy_all
 Attendance.destroy_all
 
 20.times do
-    User.create(
+    u = User.create(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
         email: Faker::Name.first_name+'@yopmail.com',
         description: Faker::Lorem.paragraph_by_chars(number: 20, supplemental: false),
         encrypted_password: Faker::Internet.password(min_length: 6, max_length: 20)
     )
+    u.errors.messages
   end
   
   puts "Les users ont été crées"
 
 15.times do
-    Event.create(
+  e = Event.create(
       title: Faker::Lorem.paragraph_by_chars(number: rand(6..20)), 
       start_date: Faker::Date.forward(days: 30), 
       duration: [5,10,20,30].sample, 
@@ -41,11 +42,14 @@ Attendance.destroy_all
   puts "Les events ont été crées"
 
 10.times do
-   Attendance.create(
+   a = Attendance.create(
     stripe_customer_id: Faker::Number.number(digits: 10),
     user: User.all.sample,
     event: Event.all.sample 
   )
+  a.errors.messages
 end
 
   puts "Les participations ont été crées"
+
+  
